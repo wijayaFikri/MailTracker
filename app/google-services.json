@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "860614329948",
+    "firebase_url": "https://mailtracker-fd289.firebaseio.com",
+    "project_id": "mailtracker-fd289",
+    "storage_bucket": "mailtracker-fd289.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:860614329948:android:983add72232b3f93",
+        "android_client_info": {
+          "package_name": "hafiz.mailtracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "860614329948-f85gd0bntuasvprgvhf8s0nfdqcfdfro.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hafiz.mailtracker",
+            "certificate_hash": "b0bb2f0d276850be9eadfce12283737028b4da78"
+          }
+        },
+        {
+          "client_id": "860614329948-2in2f2jsa371720d3u610qq73hn0ktl1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACq1cbWE3RHmus-FYkcrE7DLr8kQts9a0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "860614329948-2in2f2jsa371720d3u610qq73hn0ktl1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
