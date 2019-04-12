@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Authorization extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -30,7 +32,7 @@ public class Authorization extends AppCompatActivity {
             startActivity(intent);
         }
     }
-    public void register(String email,String password){
+    public void register(final String email, String password, final String Username){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -40,6 +42,11 @@ public class Authorization extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            String UID = user.getUid();
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference myRef = database.getReference("user_data");
+                            User_data userdata = new User_data(email,Username);
+                            myRef.child(UID).setValue(userdata);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
