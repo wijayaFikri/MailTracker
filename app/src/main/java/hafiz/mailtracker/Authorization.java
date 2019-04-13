@@ -42,11 +42,14 @@ public class Authorization extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            assert user != null;
                             String UID = user.getUid();
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference myRef = database.getReference("user_data");
                             User_data userdata = new User_data(email,Username);
                             myRef.child(UID).setValue(userdata);
+                            Intent intent = new Intent(Authorization.this,MainActivity.class);
+                            startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());

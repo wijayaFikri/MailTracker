@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -32,7 +40,26 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, Authorization.class);
             startActivity(intent);
         } else {
-            NavigationView nv = findViewById(R.id.nav_view);
+            FirebaseDatabase db;
+            db = FirebaseDatabase.getInstance();
+            DatabaseReference myref = db.getReference("user_data");
+            String UID = user.getUid();
+            final NavigationView nv = findViewById(R.id.nav_view);
+            myref.child(UID).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    User_data data = dataSnapshot.getValue(User_data.class);
+                    View header = nv.getHeaderView(0);
+                    TextView uname = header.findViewById(R.id.nav_header_textView);
+                    uname.setText(data.getUsername());
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
             MenuItem menu = nv.getMenu().findItem(R.id.nav_item_seven);
             menu.setTitle("Logout");
         }
@@ -42,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.open_Drawer, R.string.close_drawer);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
         final NavigationView nv = findViewById(R.id.nav_view);
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
