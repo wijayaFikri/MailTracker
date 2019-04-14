@@ -1,4 +1,4 @@
-package hafiz.mailtracker;
+package hafiz.mailtracker.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +11,8 @@ import android.widget.FrameLayout;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
+
+import hafiz.mailtracker.R;
 
 public abstract class BaseFragment extends Fragment {
     FirebaseDatabase mAuth;

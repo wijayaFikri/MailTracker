@@ -1,12 +1,12 @@
-package hafiz.mailtracker;
+package hafiz.mailtracker.Model;
 
 public class User_data {
     private String email;
     private String Username;
-    User_data(){
+    public User_data(){
         //empty constructor
     }
-    User_data(String email, String Username){
+     public User_data(String email, String Username){
         this.email = email;
         this.Username = Username;
     }

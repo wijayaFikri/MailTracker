@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".Login">
+    tools:context=".Fragments.Login">
 
     <Button
         android:id="@+id/Login_bttn"

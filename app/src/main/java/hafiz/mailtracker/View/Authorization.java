@@ -1,4 +1,4 @@
-package hafiz.mailtracker;
+package hafiz.mailtracker.View;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -16,6 +16,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import hafiz.mailtracker.Fragments.Login;
+import hafiz.mailtracker.Model.User_data;
+import hafiz.mailtracker.R;
 
 public class Authorization extends AppCompatActivity {
     private FirebaseAuth mAuth;
