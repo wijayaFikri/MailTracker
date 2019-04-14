@@ -1,12 +1,26 @@
 package hafiz.mailtracker;
 
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
 import android.widget.FrameLayout;
+
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
 public abstract class BaseFragment extends Fragment {
+    FirebaseDatabase mAuth;
+    String mypref = "user_data";
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mAuth = FirebaseDatabase.getInstance();
+    }
 
     public void nextFragment(Fragment fragment, int marker, int fl){
         FragmentTransaction ft = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();

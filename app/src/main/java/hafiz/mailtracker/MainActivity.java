@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                     User_data data = dataSnapshot.getValue(User_data.class);
                     View header = nv.getHeaderView(0);
                     TextView uname = header.findViewById(R.id.nav_header_textView);
+                    assert data != null;
                     uname.setText(data.getUsername());
                 }
 
