@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
             MenuItem menu = nv.getMenu().findItem(R.id.nav_item_seven);
             menu.setTitle("Logout");
         }
+        nextFragment(new main(),1);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -106,5 +109,12 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+    public void nextFragment(Fragment fragment, int marker){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
+        if(marker >0){ ft.addToBackStack("back pressed"); }
+        ft.replace(R.id.fragment_container,fragment);
+        ft.commit();
     }
 }

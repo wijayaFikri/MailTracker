@@ -4,29 +4,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".InputMail">
 
-    <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView2"
-        android:layout_width="254dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="59dp"
-        android:text="AutoCompleteTextView"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/user_text"
+        android:layout_width="269dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="344dp"
+        android:hint="To :"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/text_input_layout"
+        app:layout_constraintVertical_bias="0.408">
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="254dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView2"
+            android:layout_width="254dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            tools:layout_editor_absoluteX="78dp"
+            tools:layout_editor_absoluteY="172dp" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_input_layout"
+        android:layout_width="269dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="488dp"
+        android:hint="From :"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="254dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text=""
+            tools:layout_editor_absoluteX="79dp"
+            tools:layout_editor_absoluteY="68dp" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/about"
+        android:layout_width="269dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
+        android:hint="About :"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/user_text"
+        app:layout_constraintVertical_bias="0.021">
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="254dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text=""
+            tools:layout_editor_absoluteX="79dp"
+            tools:layout_editor_absoluteY="68dp" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+
+
 </android.support.constraint.ConstraintLayout>

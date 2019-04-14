@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 
@@ -55,7 +56,7 @@ public class Login extends BaseFragment {
         registTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nextFragment(new Register(),1);
+                nextFragment(new Register(),1,R.id.frameLayout);
             }
         });
 
