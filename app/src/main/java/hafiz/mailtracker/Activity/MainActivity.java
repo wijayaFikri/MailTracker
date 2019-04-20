@@ -1,4 +1,4 @@
-package hafiz.mailtracker.View;
+package hafiz.mailtracker.Activity;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
-import hafiz.mailtracker.Fragments.main;
+import hafiz.mailtracker.Fragments.MailReceiver;
 import hafiz.mailtracker.Model.User_data;
 import hafiz.mailtracker.R;
 
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             MenuItem menu = nv.getMenu().findItem(R.id.nav_item_seven);
             menu.setTitle("Logout");
         }
-        nextFragment(new main(),1);
+        nextFragment(new MailReceiver(),1);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 int id = menuItem.getItemId();
                 switch (id) {
                     case R.id.nav_item_one:
+                        nextFragment(new MailReceiver(),0);
                         drawer.closeDrawers();
                         break;
                     case R.id.nav_item_two:

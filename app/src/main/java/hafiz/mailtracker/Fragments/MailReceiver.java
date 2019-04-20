@@ -12,8 +12,8 @@ import java.util.Objects;
 
 import hafiz.mailtracker.R;
 
-public class main extends BaseFragment {
-    public main() {
+public class MailReceiver extends BaseFragment {
+    public MailReceiver() {
         // Required empty public constructor
     }
 
@@ -38,6 +38,13 @@ public class main extends BaseFragment {
             @Override
             public void onClick(View view) {
                 nextFragment(new InputMail(),1,R.id.fragment_container);
+            }
+        });
+        Button HistoryBtn = getActivity().findViewById(R.id.HistoryBtn);
+        HistoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nextFragment(new History(),1,R.id.fragment_container);
             }
         });
     }

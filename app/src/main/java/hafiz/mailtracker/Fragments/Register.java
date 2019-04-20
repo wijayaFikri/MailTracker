@@ -12,7 +12,7 @@ import android.widget.EditText;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import hafiz.mailtracker.View.Authorization;
+import hafiz.mailtracker.Activity.Authorization;
 import hafiz.mailtracker.R;
 
 public class Register extends BaseFragment {

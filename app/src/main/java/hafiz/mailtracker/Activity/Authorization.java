@@ -1,4 +1,4 @@
-package hafiz.mailtracker.View;
+package hafiz.mailtracker.Activity;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;

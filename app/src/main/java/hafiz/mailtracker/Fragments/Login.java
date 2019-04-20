@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import hafiz.mailtracker.View.Authorization;
+import hafiz.mailtracker.Activity.Authorization;
 import hafiz.mailtracker.R;
 
 
