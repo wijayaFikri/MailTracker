@@ -1,6 +1,7 @@
 package hafiz.mailtracker.Model;
 
 public class Mail {
+    private String ID;
     private String Sender;
     private String Receiver;
     private String about;
@@ -11,13 +12,22 @@ public class Mail {
         //empty constructora
     }
 
-    public Mail(String Sender, String Receiver, String about, String Urgent,String date,String Receiver_name) {
+    public Mail(String id,String Sender, String Receiver, String about, String Urgent,String date,String Receiver_name) {
+        this.ID = id;
         this.Sender = Sender;
         this.Receiver = Receiver;
         this.about = about;
         this.Urgent = Urgent;
         this.date = date;
         this.Receiver_name = Receiver_name;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public String getID() {
+        return ID;
     }
 
     public String getReceiver_name() {

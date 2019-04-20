@@ -123,7 +123,7 @@ public class InputMail extends BaseFragment {
 
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
                 String formattedDate = df.format(c);
-                Mail mail = new Mail(from,Data_array.get(idx),about,urgent_status,formattedDate,to);
+                Mail mail = new Mail(String.valueOf(newid[0]),from,Data_array.get(idx),about,urgent_status,formattedDate,to);
                 MailRef.child(String.valueOf(newid[0])).setValue(mail, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
