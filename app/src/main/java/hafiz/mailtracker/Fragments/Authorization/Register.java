@@ -1,4 +1,4 @@
-package hafiz.mailtracker.Fragments;
+package hafiz.mailtracker.Fragments.Authorization;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +13,7 @@ import android.widget.EditText;
 import com.google.firebase.auth.FirebaseAuth;
 
 import hafiz.mailtracker.Activity.Authorization;
+import hafiz.mailtracker.Fragments.BaseFragment;
 import hafiz.mailtracker.R;
 
 public class Register extends BaseFragment {

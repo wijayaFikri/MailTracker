@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "860614329948-lbins2ab42cududmkgvghjl1p1cr35oc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "hafiz.mailtracker",
+            "certificate_hash": "e0bc37864c7abe5bfe50e487379b6414ef843208"
+          }
+        },
+        {
           "client_id": "860614329948-2in2f2jsa371720d3u610qq73hn0ktl1.apps.googleusercontent.com",
           "client_type": 3
         }

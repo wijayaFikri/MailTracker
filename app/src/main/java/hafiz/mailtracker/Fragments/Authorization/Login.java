@@ -1,4 +1,4 @@
-package hafiz.mailtracker.Fragments;
+package hafiz.mailtracker.Fragments.Authorization;
 
 
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import hafiz.mailtracker.Activity.Authorization;
+import hafiz.mailtracker.Fragments.BaseFragment;
 import hafiz.mailtracker.R;
 
 

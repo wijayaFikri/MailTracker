@@ -1,4 +1,4 @@
-package hafiz.mailtracker.Fragments;
+package hafiz.mailtracker.Fragments.MailReceiver;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -24,6 +24,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
+import hafiz.mailtracker.Fragments.BaseFragment;
 import hafiz.mailtracker.Model.Mail;
 import hafiz.mailtracker.Model.User_data;
 import hafiz.mailtracker.R;
@@ -127,7 +128,7 @@ public class InputMail extends BaseFragment {
                 MailRef.child(String.valueOf(newid[0])).setValue(mail, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                        nextFragment(new MailReceiver(),1,R.id.fragment_container);
+                        nextFragment(new MailReceiver_main(),1,R.id.fragment_container);
                     }
                 });
 

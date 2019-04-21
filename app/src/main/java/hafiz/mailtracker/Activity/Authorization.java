@@ -16,8 +16,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
-import hafiz.mailtracker.Fragments.Login;
+import java.util.Objects;
+
+import hafiz.mailtracker.Fragments.Authorization.Login;
 import hafiz.mailtracker.Model.User_data;
 import hafiz.mailtracker.R;
 
@@ -34,6 +38,7 @@ public class Authorization extends AppCompatActivity {
         if (currentUser != null){
             Intent intent = new Intent(this,MainActivity.class);
             startActivity(intent);
+            finish();
         }
     }
     public void register(final String email, String password, final String Username){
@@ -47,13 +52,27 @@ public class Authorization extends AppCompatActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             assert user != null;
-                            String UID = user.getUid();
+                            final String UID = user.getUid();
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
-                            DatabaseReference myRef = database.getReference("user_data");
-                            User_data userdata = new User_data(email,Username);
-                            myRef.child(UID).setValue(userdata);
-                            Intent intent = new Intent(Authorization.this,MainActivity.class);
-                            startActivity(intent);
+                            final DatabaseReference myRef = database.getReference("user_data");
+                            final User_data userdata = new User_data(email,Username);
+                            FirebaseInstanceId.getInstance().getInstanceId()
+                                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                                            if (!task.isSuccessful()) {
+
+                                                return;
+                                            }
+
+                                            String token = Objects.requireNonNull(task.getResult()).getToken();
+                                            userdata.setToken(token);
+                                            myRef.child(UID).setValue(userdata);
+                                            Intent intent = new Intent(Authorization.this,MainActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());

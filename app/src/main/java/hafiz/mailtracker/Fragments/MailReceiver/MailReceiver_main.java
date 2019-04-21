@@ -1,4 +1,4 @@
-package hafiz.mailtracker.Fragments;
+package hafiz.mailtracker.Fragments.MailReceiver;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,10 +10,11 @@ import android.widget.Button;
 
 import java.util.Objects;
 
+import hafiz.mailtracker.Fragments.BaseFragment;
 import hafiz.mailtracker.R;
 
-public class MailReceiver extends BaseFragment {
-    public MailReceiver() {
+public class MailReceiver_main extends BaseFragment {
+    public MailReceiver_main() {
         // Required empty public constructor
     }
 

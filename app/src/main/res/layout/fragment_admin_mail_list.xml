@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.MailReceiver.History">
+    tools:context=".Fragments.Admin.AdminMailList">
 
     <ListView
-        android:id="@+id/History_list"
+        android:id="@+id/admin_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

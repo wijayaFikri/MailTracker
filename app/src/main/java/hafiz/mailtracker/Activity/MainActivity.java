@@ -25,7 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
-import hafiz.mailtracker.Fragments.MailReceiver;
+import hafiz.mailtracker.Fragments.Admin.AdminMain;
+import hafiz.mailtracker.Fragments.MailReceiver.MailReceiver_main;
 import hafiz.mailtracker.Model.User_data;
 import hafiz.mailtracker.R;
 
@@ -38,15 +39,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
+        final NavigationView nv = findViewById(R.id.nav_view);
+        String email = "";
+        if (user != null) {
+            email = user.getEmail();
+        }
         if (user == null) {
             Intent intent = new Intent(this, Authorization.class);
             startActivity(intent);
-        } else {
+        } else if(email.equals("admin@admin.com")){
+            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_seven);
+            menu.setTitle("Logout");
+            nextFragment(new AdminMain(),0);
+        }
+        else {
             FirebaseDatabase db;
             db = FirebaseDatabase.getInstance();
             DatabaseReference myref = db.getReference("user_data");
             String UID = user.getUid();
-            final NavigationView nv = findViewById(R.id.nav_view);
             myref.child(UID).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -65,8 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
             MenuItem menu = nv.getMenu().findItem(R.id.nav_item_seven);
             menu.setTitle("Logout");
+            nextFragment(new MailReceiver_main(),0);
         }
-        nextFragment(new MailReceiver(),1);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -75,14 +86,13 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
-        final NavigationView nv = findViewById(R.id.nav_view);
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int id = menuItem.getItemId();
                 switch (id) {
                     case R.id.nav_item_one:
-                        nextFragment(new MailReceiver(),0);
+                        nextFragment(new MailReceiver_main(),0);
                         drawer.closeDrawers();
                         break;
                     case R.id.nav_item_two:

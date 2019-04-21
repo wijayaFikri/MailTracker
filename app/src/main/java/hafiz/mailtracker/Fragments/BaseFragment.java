@@ -15,9 +15,9 @@ import java.util.Objects;
 import hafiz.mailtracker.R;
 
 public abstract class BaseFragment extends Fragment {
-    FirebaseDatabase mAuth;
-    String mypref = "user_data";
-    String mailref = "Mail";
+    public FirebaseDatabase mAuth;
+    public String mypref = "user_data";
+    public String mailref = "Mail";
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

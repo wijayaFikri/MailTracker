@@ -8,6 +8,8 @@ public class Mail {
     private String Urgent;
     private String date;
     private String Receiver_name;
+    private String Status;
+    private String Received;
     public Mail() {
         //empty constructora
     }
@@ -20,6 +22,24 @@ public class Mail {
         this.Urgent = Urgent;
         this.date = date;
         this.Receiver_name = Receiver_name;
+        this.Status = "0";
+        this.Received = "0";
+    }
+
+    public void setReceived(String received) {
+        Received = received;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
+
+    public String getReceived() {
+        return Received;
+    }
+
+    public String getStatus() {
+        return Status;
     }
 
     public void setID(String ID) {
