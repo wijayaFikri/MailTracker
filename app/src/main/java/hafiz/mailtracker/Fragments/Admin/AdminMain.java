@@ -60,13 +60,14 @@ public class AdminMain extends BaseFragment {
                     channel = new NotificationChannel(
                             "id",
                             "name",
-                            NotificationCompat.PRIORITY_DEFAULT);
+                            NotificationManager.IMPORTANCE_HIGH);
                     channel.setDescription("Description");
                     final NotificationManager notificationManager = (NotificationManager)
                             getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
                     if (notificationManager != null) {
                         notificationManager.createNotificationChannel(channel);
                     }
+
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(Objects.requireNonNull(getActivity()), "id")
                             .setSmallIcon(R.drawable.ic_account_box_black_24dp)
                             .setContentTitle("Test")
