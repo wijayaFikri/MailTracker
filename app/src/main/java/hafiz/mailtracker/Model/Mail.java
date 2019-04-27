@@ -10,11 +10,12 @@ public class Mail {
     private String Receiver_name;
     private String Status;
     private String Received;
+    private String Receiver_address;
     public Mail() {
         //empty constructora
     }
 
-    public Mail(String id,String Sender, String Receiver, String about, String Urgent,String date,String Receiver_name) {
+    public Mail(String id,String Sender, String Receiver, String about, String Urgent,String date,String Receiver_name,String receiver_address) {
         this.ID = id;
         this.Sender = Sender;
         this.Receiver = Receiver;
@@ -24,6 +25,15 @@ public class Mail {
         this.Receiver_name = Receiver_name;
         this.Status = "0";
         this.Received = "0";
+        Receiver_address = receiver_address;
+    }
+
+    public String getReceiver_address() {
+        return Receiver_address;
+    }
+
+    public void setReceiver_address(String receiver_address) {
+        Receiver_address = receiver_address;
     }
 
     public void setReceived(String received) {

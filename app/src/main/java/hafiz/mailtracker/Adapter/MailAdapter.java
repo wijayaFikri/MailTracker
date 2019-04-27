@@ -75,6 +75,8 @@ public class MailAdapter extends ArrayAdapter<Mail> {
                 tv1.setText(m.getDate());
             }
             if (marker == 2) {
+                TextView tv3 = v.findViewById(R.id.Address_tv);
+                tv3.setText(m.getReceiver_address());
                 TextView tv2 = v.findViewById(R.id.confirm_txt);
                 tv2.setOnClickListener(new View.OnClickListener() {
                     @Override

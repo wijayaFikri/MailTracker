@@ -54,7 +54,7 @@ public class InputMail extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         MailRef = mAuth.getReference("Mail");
         DatabaseReference myRef = mAuth.getReference(mypref);
-        final ArrayList<String> Data_array = new ArrayList<>();
+        final ArrayList<User_data> Data_array = new ArrayList<>();
         final ArrayList<String> username_data = new ArrayList<>();
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -63,7 +63,7 @@ public class InputMail extends BaseFragment {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     User_data user_data = data.getValue(User_data.class);
                     assert user_data != null;
-                    Data_array.add(user_data.getEmail());
+                    Data_array.add(user_data);
                     username_data.add(user_data.getUsername());
                 }
             }
@@ -124,7 +124,7 @@ public class InputMail extends BaseFragment {
 
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
                 String formattedDate = df.format(c);
-                Mail mail = new Mail(String.valueOf(newid[0]),from,Data_array.get(idx),about,urgent_status,formattedDate,to);
+                Mail mail = new Mail(String.valueOf(newid[0]),from,Data_array.get(idx).getEmail(),about,urgent_status,formattedDate,to,Data_array.get(idx).getAddress());
                 MailRef.child(String.valueOf(newid[0])).setValue(mail, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {

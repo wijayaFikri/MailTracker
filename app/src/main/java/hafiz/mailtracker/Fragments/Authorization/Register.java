@@ -48,7 +48,9 @@ public class Register extends BaseFragment {
                 String password = passwordET.getText().toString();
                 EditText nameET = getActivity().findViewById(R.id.fullname_ed);
                 String name = nameET.getText().toString();
-                ((Authorization)getActivity()).register(email,password,name);
+                EditText loc = getActivity().findViewById(R.id.address_et);
+                String address = loc.getText().toString();
+                ((Authorization)getActivity()).register(email,password,name,address);
                 }
         });
     }

@@ -12,56 +12,72 @@
         android:id="@+id/email_ed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginBottom="12dp"
         android:drawableLeft="@drawable/ic_email_black_36dp"
         android:drawablePadding="10dp"
         android:ems="10"
-        android:hint="email"
+        android:hint="Email"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/password_ed"
+        app:layout_constraintStart_toStartOf="@+id/password_ed" />
+
+    <EditText
+        android:id="@+id/password_ed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="8dp"
+        android:drawableLeft="@drawable/ic_vpn_key_black_36dp"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/fullname_ed"
+        app:layout_constraintEnd_toEndOf="@+id/fullname_ed" />
+
+    <EditText
+        android:id="@+id/fullname_ed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="174dp"
+        android:drawableLeft="@drawable/ic_account_box_black36dp"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Fullname"
         android:inputType="textPersonName"
         android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/password_ed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:drawableLeft="@drawable/ic_vpn_key_black_36dp"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:hint="password"
-        android:inputType="textPassword"
-        android:paddingLeft="10dp"
-        app:layout_constraintStart_toStartOf="@+id/email_ed"
-        app:layout_constraintTop_toBottomOf="@+id/email_ed" />
-
-    <EditText
-        android:id="@+id/fullname_ed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:drawableLeft="@drawable/ic_account_box_black36dp"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:hint="full name"
-        android:inputType="textPersonName"
-        android:paddingLeft="10dp"
-        app:layout_constraintStart_toStartOf="@+id/password_ed"
-        app:layout_constraintTop_toBottomOf="@+id/password_ed" />
-
     <Button
         android:id="@+id/regist_bttn"
         android:layout_width="212dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="46dp"
         android:background="@drawable/button_background"
         android:text="Register"
         android:textColor="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/address_et" />
+
+    <EditText
+        android:id="@+id/address_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="1dp"
+        android:drawableStart="@drawable/ic_location_on_black_24dp"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Desk Address"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="@+id/fullname_ed"
         app:layout_constraintTop_toBottomOf="@+id/fullname_ed" />
 
 </android.support.constraint.ConstraintLayout>

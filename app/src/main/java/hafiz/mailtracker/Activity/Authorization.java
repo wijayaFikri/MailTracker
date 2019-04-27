@@ -41,7 +41,7 @@ public class Authorization extends AppCompatActivity {
             finish();
         }
     }
-    public void register(final String email, String password, final String Username){
+    public void register(final String email, String password, final String Username,final String Address){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -55,24 +55,10 @@ public class Authorization extends AppCompatActivity {
                             final String UID = user.getUid();
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             final DatabaseReference myRef = database.getReference("user_data");
-                            final User_data userdata = new User_data(email,Username);
-                            FirebaseInstanceId.getInstance().getInstanceId()
-                                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                                            if (!task.isSuccessful()) {
-
-                                                return;
-                                            }
-
-                                            String token = Objects.requireNonNull(task.getResult()).getToken();
-                                            userdata.setToken(token);
-                                            myRef.child(UID).setValue(userdata);
-                                            Intent intent = new Intent(Authorization.this,MainActivity.class);
-                                            startActivity(intent);
-                                        }
-                                    });
-
+                            final User_data userdata = new User_data(email,Username,Address);
+                            myRef.child(UID).setValue(userdata);
+                            Intent intent = new Intent(Authorization.this,MainActivity.class);
+                            startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
