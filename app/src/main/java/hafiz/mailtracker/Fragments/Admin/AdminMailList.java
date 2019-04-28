@@ -51,6 +51,12 @@ public class AdminMailList extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         DatabaseReference Mymail;
         Mymail = mAuth.getReference(mailref);
+        final String status;
+        if (this.getArguments() != null) {
+            status = this.getArguments().getString("value");
+        } else {
+            status = "0";
+        }
         final List<Mail> MailList = new ArrayList<>();
         Mymail.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -58,14 +64,23 @@ public class AdminMailList extends BaseFragment {
                 for (DataSnapshot ds: dataSnapshot.getChildren()
                 ) {
                     Mail Amail = ds.getValue(Mail.class);
-                    if (Amail != null && Integer.parseInt(Amail.getStatus()) == 0) {
-                        Log.d("TAG", Amail.getReceiver());
+                    if (status.equals("0")) {
+                        if (Amail != null && Integer.parseInt(Amail.getStatus()) == 0) {
+                            Log.d("TAG", Amail.getReceiver());
+                            MailList.add(Amail);
+                        }
+                    } else {
                         MailList.add(Amail);
                     }
                 }
                 ListView lv = Objects.requireNonNull(getActivity()).findViewById(R.id.admin_listview);
                 if( lv != null ) {
-                    MailAdapter listadapt = new MailAdapter(getActivity(), R.layout.admin_listview_item, MailList,2);
+                    MailAdapter listadapt;
+                    if(status.equals("0")){
+                        listadapt = new MailAdapter(getActivity(), R.layout.admin_listview_item, MailList,2);
+                    } else {
+                        listadapt = new MailAdapter(getActivity(), R.layout.admin_listview_item, MailList,3);
+                    }
                     lv.setDivider(null);
                     lv.setAdapter(listadapt);
                 }

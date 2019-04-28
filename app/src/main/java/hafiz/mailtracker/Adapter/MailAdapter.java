@@ -2,6 +2,7 @@ package hafiz.mailtracker.Adapter;
 
 import android.content.ClipData;
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -94,6 +95,17 @@ public class MailAdapter extends ArrayAdapter<Mail> {
                 });
 
 
+            } else if (marker == 3){
+                TextView tv2 = v.findViewById(R.id.confirm_txt);
+                if (m.getStatus().equals("1")){
+                    tv2.setText("Completed");
+
+                } else {
+                    tv2.setText("Incomplete");
+                    tv2.setTextColor(Color.parseColor("#ea1010"));
+                }
+                TextView tv3 = v.findViewById(R.id.Address_tv);
+                tv3.setText(m.getReceiver_address());
             }
 
         }

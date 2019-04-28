@@ -48,7 +48,18 @@ public class AdminMain extends BaseFragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nextFragment(new AdminMailList(),1,R.id.fragment_container);
+                Bundle bundle = new Bundle();
+                bundle.putString("value","0");
+                nextFragment(new AdminMailList(),1,R.id.fragment_container,bundle);
+            }
+        });
+        Button btn3 = getActivity().findViewById(R.id.admin_hty_btn);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("value","1");
+                nextFragment(new AdminMailList(),1,R.id.fragment_container,bundle);
             }
         });
         Button btn2 = getActivity().findViewById(R.id.test);
