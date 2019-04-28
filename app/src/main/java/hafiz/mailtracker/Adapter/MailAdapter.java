@@ -3,15 +3,18 @@ package hafiz.mailtracker.Adapter;
 import android.content.ClipData;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,6 +82,12 @@ public class MailAdapter extends ArrayAdapter<Mail> {
                 TextView tv3 = v.findViewById(R.id.Address_tv);
                 tv3.setText(m.getReceiver_address());
                 TextView tv2 = v.findViewById(R.id.confirm_txt);
+                if (m.getUrgent().equals("yes")){
+                    TextView importance = v.findViewById(R.id.important_Tv);
+                    importance.setVisibility(View.VISIBLE);
+                    LinearLayout ll = v.findViewById(R.id.parent_linear);
+                    ll.setBackgroundResource(R.drawable.card_bg);
+                }
                 tv2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
