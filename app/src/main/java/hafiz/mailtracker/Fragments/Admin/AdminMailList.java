@@ -65,11 +65,13 @@ public class AdminMailList extends BaseFragment {
                 ) {
                     Mail Amail = ds.getValue(Mail.class);
                     if (status.equals("0")) {
-                        if (Amail != null && Integer.parseInt(Amail.getStatus()) == 0) {
+                        if (Amail != null && Integer.parseInt(Amail.getStatus()) == 0 && Amail.getUrgent().equals("no")) {
                             Log.d("TAG", Amail.getReceiver());
                             MailList.add(Amail);
+                        } else if(Amail != null && Integer.parseInt(Amail.getStatus()) == 0 && Amail.getUrgent().equals("yes")) {
+                            MailList.add(0,Amail);
                         }
-                    } else {
+                    }  else {
                         MailList.add(Amail);
                     }
                 }

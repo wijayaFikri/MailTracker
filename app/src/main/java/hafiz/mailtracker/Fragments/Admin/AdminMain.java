@@ -1,8 +1,10 @@
 package hafiz.mailtracker.Fragments.Admin;
 
+import android.app.ActivityManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,6 +22,7 @@ import java.util.Objects;
 import hafiz.mailtracker.Activity.MainActivity;
 import hafiz.mailtracker.Fragments.BaseFragment;
 import hafiz.mailtracker.R;
+import hafiz.mailtracker.services.MailChecker;
 
 
 public class AdminMain extends BaseFragment {
@@ -45,6 +48,10 @@ public class AdminMain extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Button btn = getActivity().findViewById(R.id.AdminBtn);
+        if (!isMyServiceRunning(MailChecker.class)) {
+            Intent intent = new Intent(getActivity(), MailChecker.class);
+            getActivity().startService(intent);
+        }
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,5 +95,14 @@ public class AdminMain extends BaseFragment {
                 }
             }
         });
+    }
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
