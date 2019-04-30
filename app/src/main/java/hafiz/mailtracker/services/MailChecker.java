@@ -37,6 +37,7 @@ public class MailChecker extends Service {
         ref.limitToLast(1).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                String a = "a";
                 Mail data = dataSnapshot.getValue(Mail.class);
                 String Sender = data.getSender();
                 String about = data.getAbout();
