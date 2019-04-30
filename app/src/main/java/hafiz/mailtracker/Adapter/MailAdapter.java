@@ -87,6 +87,11 @@ public class MailAdapter extends ArrayAdapter<Mail> {
                     importance.setVisibility(View.VISIBLE);
                     LinearLayout ll = v.findViewById(R.id.parent_linear);
                     ll.setBackgroundResource(R.drawable.card_bg);
+                } else {
+                    TextView importance = v.findViewById(R.id.important_Tv);
+                    importance.setVisibility(View.INVISIBLE);
+                    LinearLayout ll = v.findViewById(R.id.parent_linear);
+                    ll.setBackground(null);
                 }
                 tv2.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -94,6 +99,11 @@ public class MailAdapter extends ArrayAdapter<Mail> {
                         m.setStatus("1");
                         FirebaseDatabase mAuth = FirebaseDatabase.getInstance();
                         DatabaseReference db = mAuth.getReference("Mail");
+                        DatabaseReference UserSideDb = mAuth.getReference("UserMail");
+                        String modifiedEmail = m.getReceiver();
+                        modifiedEmail = modifiedEmail.replace("@","at");
+                        modifiedEmail = modifiedEmail.replace(".","dot");
+                        UserSideDb.child(modifiedEmail).child(m.getID()).setValue(m);
                         db.child(m.getID()).setValue(m);
                         Toast.makeText(mContext, m.getSender(),
                                 Toast.LENGTH_LONG).show();

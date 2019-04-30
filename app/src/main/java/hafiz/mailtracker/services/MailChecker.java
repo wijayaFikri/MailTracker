@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
+import hafiz.mailtracker.Model.Mail;
 import hafiz.mailtracker.R;
 
 public class MailChecker extends Service {
@@ -36,7 +37,9 @@ public class MailChecker extends Service {
         ref.limitToLast(1).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                Mail data = dataSnapshot.getValue(Mail.class);
+                String Sender = data.getSender();
+                String about = data.getAbout();
                 if ( flag == 0 ){
                     flag +=1;
                 }  else{
@@ -55,8 +58,8 @@ public class MailChecker extends Service {
 
                         NotificationCompat.Builder builder = new NotificationCompat.Builder(Objects.requireNonNull(getApplicationContext()), "id")
                                 .setSmallIcon(R.drawable.ic_account_box_black_24dp)
-                                .setContentTitle("Test")
-                                .setContentText("Test ugha")
+                                .setContentTitle(Sender)
+                                .setContentText(about)
                                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
                         notificationManager.notify(1, builder.build());
                     }

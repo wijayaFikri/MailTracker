@@ -32,6 +32,7 @@ import hafiz.mailtracker.R;
 
 public class InputMail extends BaseFragment {
     DatabaseReference MailRef;
+    DatabaseReference UserSideMail;
     public InputMail() {
         // Required empty public constructor
     }
@@ -53,6 +54,7 @@ public class InputMail extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         MailRef = mAuth.getReference("Mail");
+        UserSideMail = mAuth.getReference("UserMail");
         DatabaseReference myRef = mAuth.getReference(mypref);
         final ArrayList<User_data> Data_array = new ArrayList<>();
         final ArrayList<String> username_data = new ArrayList<>();
@@ -66,28 +68,6 @@ public class InputMail extends BaseFragment {
                     Data_array.add(user_data);
                     username_data.add(user_data.getUsername());
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        final int[] newid = new int[1];
-        MailRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String id= "";
-                for (DataSnapshot ds: dataSnapshot.getChildren()
-                ) {
-                    id =ds.getKey();
-                }
-                if (id != "") {
-                    newid[0] = Integer.parseInt(id) + 1;
-                } else {
-                    newid[0] = 0;
-                }
-
             }
 
             @Override
@@ -124,8 +104,16 @@ public class InputMail extends BaseFragment {
 
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
                 String formattedDate = df.format(c);
-                Mail mail = new Mail(String.valueOf(newid[0]),from,Data_array.get(idx).getEmail(),about,urgent_status,formattedDate,to,Data_array.get(idx).getAddress());
-                MailRef.child(String.valueOf(newid[0])).setValue(mail, new DatabaseReference.CompletionListener() {
+
+                String modifiedEmail = Data_array.get(idx).getEmail().replace("@","at");
+                modifiedEmail = modifiedEmail.replace(".","dot");
+                DatabaseReference newref = UserSideMail.child(modifiedEmail).push();
+                String key = newref.getKey();
+                System.out.println(key);
+                Mail mail = new Mail(key,from,Data_array.get(idx).getEmail(),about,urgent_status,formattedDate,to,Data_array.get(idx).getAddress());
+                newref.setValue(mail);
+
+                MailRef.child(key).setValue(mail, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                         nextFragment(new MailReceiver_main(),1,R.id.fragment_container);
