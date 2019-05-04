@@ -35,6 +35,5 @@ public class UserMain extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String x = "esk";
     }
 }
