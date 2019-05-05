@@ -7,7 +7,7 @@
             android:title="Profile" />
     </group>
         <group>
-            <item android:id="@+id/nav_item_seven"
+            <item android:id="@+id/nav_item_three"
                 android:title="Login" />
         </group>
 </menu>

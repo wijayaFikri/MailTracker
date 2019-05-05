@@ -25,6 +25,7 @@
             <!--</intent-filter>-->
         <!--</service>-->
         <service android:name=".services.MailChecker" />
+        <service android:name=".services.UserMailChecker" />
     </application>
 
 </manifest>

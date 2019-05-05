@@ -1,5 +1,7 @@
 package hafiz.mailtracker.Fragments;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,20 +27,34 @@ public abstract class BaseFragment extends Fragment {
         mAuth = FirebaseDatabase.getInstance();
     }
 
-    public void nextFragment(Fragment fragment, int marker, int fl,Bundle bdl){
+    public void nextFragment(Fragment fragment, int marker, int fl, Bundle bdl) {
         FragmentTransaction ft = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
         fragment.setArguments(bdl);
         ft.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
-        if(marker >0){ ft.addToBackStack("back pressed"); }
-        ft.replace(fl,fragment);
+        if (marker > 0) {
+            ft.addToBackStack("back pressed");
+        }
+        ft.replace(fl, fragment);
         ft.commit();
     }
 
-    public void nextFragment(Fragment fragment, int marker, int fl){
+    public void nextFragment(Fragment fragment, int marker, int fl) {
         FragmentTransaction ft = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
         ft.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
-        if(marker >0){ ft.addToBackStack("back pressed"); }
-        ft.replace(fl,fragment);
+        if (marker > 0) {
+            ft.addToBackStack("back pressed");
+        }
+        ft.replace(fl, fragment);
         ft.commit();
+    }
+
+    public boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

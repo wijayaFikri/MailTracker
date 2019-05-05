@@ -27,8 +27,11 @@ import java.util.Objects;
 
 import hafiz.mailtracker.Fragments.Admin.AdminMain;
 import hafiz.mailtracker.Fragments.MailReceiver.MailReceiver_main;
+import hafiz.mailtracker.Fragments.User.UserMain;
 import hafiz.mailtracker.Model.User_data;
 import hafiz.mailtracker.R;
+import hafiz.mailtracker.services.MailChecker;
+import hafiz.mailtracker.services.UserMailChecker;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -44,13 +47,96 @@ public class MainActivity extends AppCompatActivity {
         if (user != null) {
             email = user.getEmail();
         }
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        final DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.open_Drawer, R.string.close_drawer);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(true);
         if (user == null) {
             Intent intent = new Intent(this, Authorization.class);
             startActivity(intent);
         } else if(email.equals("admin@admin.com")){
-            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_seven);
+            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_three);
             menu.setTitle("Logout");
+            nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    int id = menuItem.getItemId();
+                    switch (id) {
+                        case R.id.nav_item_one:
+                            nextFragment(new AdminMain(),0);
+                            drawer.closeDrawers();
+                            break;
+                        case R.id.nav_item_two:
+                            Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
+                            drawer.closeDrawers();
+                            break;
+                        case R.id.nav_item_three:
+                            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_three);
+                            String text = menu.getTitle().toString();
+                            if (text.equals("Login")) {
+                                Intent intent = new Intent(MainActivity.this, Authorization.class);
+                                startActivity(intent);
+                                drawer.closeDrawers();
+                            } else {
+                                TextView tv = nv.getHeaderView(0).findViewById(R.id.nav_header_textView);
+                                tv.setText("");
+                                mAuth.signOut();
+                                Intent services = new Intent(MainActivity.this, MailChecker.class);
+                                stopService(services);
+                                Intent intent = new Intent(MainActivity.this, Authorization.class);
+                                startActivity(intent);
+                            }
+                            break;
+                        default:
+                            return true;
+                    }
+                    return true;
+                }
+            });
             nextFragment(new AdminMain(),0);
+        } else if(email.equals("security@admin.com")){
+            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_three);
+            menu.setTitle("Logout");
+            nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    int id = menuItem.getItemId();
+                    switch (id) {
+                        case R.id.nav_item_one:
+                            nextFragment(new MailReceiver_main(),0);
+                            drawer.closeDrawers();
+                            break;
+                        case R.id.nav_item_two:
+                            Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
+                            drawer.closeDrawers();
+                            break;
+                        case R.id.nav_item_three:
+                            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_three);
+                            String text = menu.getTitle().toString();
+                            if (text.equals("Login")) {
+                                Intent intent = new Intent(MainActivity.this, Authorization.class);
+                                startActivity(intent);
+                                drawer.closeDrawers();
+                            } else {
+                                TextView tv = nv.getHeaderView(0).findViewById(R.id.nav_header_textView);
+                                tv.setText("");
+                                mAuth.signOut();
+                                
+                                Intent intent = new Intent(MainActivity.this, Authorization.class);
+                                startActivity(intent);
+                            }
+                            break;
+                        default:
+                            return true;
+                    }
+                    return true;
+                }
+            });
+            nextFragment(new MailReceiver_main(),0);
         }
         else {
             FirebaseDatabase db;
@@ -72,55 +158,48 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
-
-            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_seven);
+            nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    int id = menuItem.getItemId();
+                    switch (id) {
+                        case R.id.nav_item_one:
+                            nextFragment(new UserMain(),0);
+                            drawer.closeDrawers();
+                            break;
+                        case R.id.nav_item_two:
+                            Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
+                            drawer.closeDrawers();
+                            break;
+                        case R.id.nav_item_three:
+                            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_three);
+                            String text = menu.getTitle().toString();
+                            if (text.equals("Login")) {
+                                Intent intent = new Intent(MainActivity.this, Authorization.class);
+                                startActivity(intent);
+                                drawer.closeDrawers();
+                            } else {
+                                TextView tv = nv.getHeaderView(0).findViewById(R.id.nav_header_textView);
+                                tv.setText("");
+                                mAuth.signOut();
+                                Intent services = new Intent(MainActivity.this, UserMailChecker.class);
+                                stopService(services);
+                                Intent intent = new Intent(MainActivity.this, Authorization.class);
+                                startActivity(intent);
+                            }
+                            break;
+                        default:
+                            return true;
+                    }
+                    return true;
+                }
+            });
+            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_three);
             menu.setTitle("Logout");
-            nextFragment(new MailReceiver_main(),0);
+            nextFragment(new UserMain(),0);
         }
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        final DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.open_Drawer, R.string.close_drawer);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int id = menuItem.getItemId();
-                switch (id) {
-                    case R.id.nav_item_one:
-                        nextFragment(new MailReceiver_main(),0);
-                        drawer.closeDrawers();
-                        break;
-                    case R.id.nav_item_two:
-                        Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
-                        drawer.closeDrawers();
-                        break;
-                    case R.id.nav_item_seven:
-                        MenuItem menu = nv.getMenu().findItem(R.id.nav_item_seven);
-                        String text = menu.getTitle().toString();
-                        if (text.equals("Login")) {
-                            Intent intent = new Intent(MainActivity.this, Authorization.class);
-                            startActivity(intent);
-                            drawer.closeDrawers();
-                        } else {
-                            TextView tv = nv.getHeaderView(0).findViewById(R.id.nav_header_textView);
-                            tv.setText("");
-                            mAuth.signOut();
-                            menu.setTitle("Login");
-                            Intent intent = new Intent(MainActivity.this, Authorization.class);
-                            startActivity(intent);
-                        }
-                        break;
-                    default:
-                        return true;
-                }
-                return true;
-            }
-        });
+
     }
     public void nextFragment(Fragment fragment, int marker){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

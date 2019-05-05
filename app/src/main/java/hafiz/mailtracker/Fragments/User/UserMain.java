@@ -1,6 +1,7 @@
 package hafiz.mailtracker.Fragments.User;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,6 +27,8 @@ import hafiz.mailtracker.Adapter.UserMailAdapter;
 import hafiz.mailtracker.Fragments.BaseFragment;
 import hafiz.mailtracker.Model.Mail;
 import hafiz.mailtracker.R;
+import hafiz.mailtracker.services.MailChecker;
+import hafiz.mailtracker.services.UserMailChecker;
 
 
 public class UserMain extends BaseFragment {
@@ -43,6 +46,10 @@ public class UserMain extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if (!isMyServiceRunning(UserMailChecker.class)) {
+            Intent intent = new Intent(getActivity(), UserMailChecker.class);
+            getActivity().startService(intent);
+        }
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_user_main, container, false);
     }

@@ -1,6 +1,5 @@
 package hafiz.mailtracker.services;
 
-import android.app.IntentService;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
@@ -11,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,7 +22,8 @@ import java.util.Objects;
 import hafiz.mailtracker.Model.Mail;
 import hafiz.mailtracker.R;
 
-public class MailChecker extends Service {
+public class UserMailChecker extends Service {
+
     int flag;
 
     @Override
@@ -33,8 +34,11 @@ public class MailChecker extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference ref = db.getReference("Mail");
-        ref.limitToLast(1).addChildEventListener(new ChildEventListener() {
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        email = email.replace("@","at");
+        email = email.replace(".","dot");
+        DatabaseReference ref = db.getReference("UserMail");
+        ref.child(email).limitToLast(1).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Mail data = dataSnapshot.getValue(Mail.class);
@@ -58,8 +62,8 @@ public class MailChecker extends Service {
 
                         NotificationCompat.Builder builder = new NotificationCompat.Builder(Objects.requireNonNull(getApplicationContext()), "id")
                                 .setSmallIcon(R.drawable.ic_account_box_black_24dp)
-                                .setContentTitle(Sender)
-                                .setContentText(about)
+                                .setContentTitle("New Mail Received!")
+                                .setContentText("About : " + about)
                                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
                         notificationManager.notify(1, builder.build());
                     }
@@ -89,9 +93,9 @@ public class MailChecker extends Service {
         return START_STICKY;
         // For each start request, send a message to start a job and deliver the
     }
-        @Override
+    @Nullable
+    @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
-
 }

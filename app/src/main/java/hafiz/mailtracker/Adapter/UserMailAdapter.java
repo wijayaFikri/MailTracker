@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,6 @@ public class UserMailAdapter extends ArrayAdapter<Mail> {
         }
 
         final Mail m = getItem(position);
-
         if (m != null) {
             TextView tv1 = v.findViewById(R.id.mail_sender_tv);
             TextView tv2 = v.findViewById(R.id.mail_about_tv);
@@ -54,17 +54,19 @@ public class UserMailAdapter extends ArrayAdapter<Mail> {
             TextView tv4 = v.findViewById(R.id.mail_receiver_address_tv);
 
             if (tv1 != null) {
-                tv1.setText(m.getSender());
+                String sender = "From : " + m.getSender();
+                tv1.setText(sender);
                 tv1.setFocusable(false);
             }
 
             if (tv2 != null) {
-                tv2.setText(m.getAbout());
+                String about = "About : " + m.getAbout();
+                tv2.setText(about);
                 tv2.setFocusable(false);
             }
 
             if (tv3 != null) {
-                tv3.setText(m.getReceiver());
+                tv3.setText(m.getReceiver_name());
                 tv3.setFocusable(false);
             }
             if (tv4 != null){
