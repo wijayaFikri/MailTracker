@@ -8,4 +8,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="confirm">CONFIRM</string>
     <string name="admin">Admin</string>
+    <string name="mail_sender">Mail_Sender</string>
+    <string name="mail_about">Mail_About</string>
+    <string name="mail_receiver">Mail_Receiver</string>
+    <string name="mail_receiver_address">mail_receiver_address</string>
 </resources>
