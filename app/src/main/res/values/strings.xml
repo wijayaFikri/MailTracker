@@ -12,4 +12,9 @@
     <string name="mail_about">Mail_About</string>
     <string name="mail_receiver">Mail_Receiver</string>
     <string name="mail_receiver_address">mail_receiver_address</string>
+    <string name="mail_received">Mail Received</string>
+    <string name="date_template">10-Apr-2019</string>
+    <string name="received_by_admin">Received by admin :</string>
+    <string name="confirm_mail">CONFIRM MAIL</string>
+    <string name="from">From :</string>
 </resources>
