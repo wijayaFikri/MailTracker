@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,10 +8,14 @@
     android:background="#dcdde1"
     android:orientation="vertical"
     tools:context=".Fragments.User.UserTrack">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="120dp"
         android:layout_gravity="center"
         android:layout_marginStart="30dp"
         android:layout_marginTop="50dp"
@@ -29,6 +34,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"/>
             <TextView
+                android:id="@+id/sender_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="mr.sender"
@@ -39,10 +45,27 @@
                 android:text="About : "
                 android:layout_gravity="center"/>
             <TextView
+                android:id="@+id/about_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="about the mail"
                 android:layout_gravity="center"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="7"/>
+                <TextView
+                    android:id="@+id/date_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="10-apr-2019"/>
+            </LinearLayout>
+
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
@@ -64,41 +87,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:text="@string/mail_received" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/date_template" />
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/middle_line">
-
-    </View>
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -112,6 +100,41 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="NO"
+                android:textSize="30sp" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/middle_line">
+
+    </View>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="@string/received_by" />
+
+            <TextView
+                android:id="@+id/mail_receiver_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/not_yet"
                 android:textSize="30sp" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
@@ -132,13 +155,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:orientation="vertical">
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="3"
-                android:visibility="invisible"></View>
+                android:visibility="invisible"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -155,7 +179,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="3"
-                android:visibility="invisible"></View>
+                android:visibility="invisible"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
-</LinearLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center"/>
+    </LinearLayout>
+</ScrollView>

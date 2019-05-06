@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -21,7 +22,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import org.w3c.dom.Text;
 
 import java.util.List;
+import java.util.Objects;
 
+import hafiz.mailtracker.Activity.MainActivity;
 import hafiz.mailtracker.Fragments.Admin.AdminMailList;
 import hafiz.mailtracker.Model.Mail;
 import hafiz.mailtracker.R;
@@ -52,6 +55,7 @@ public class UserMailAdapter extends ArrayAdapter<Mail> {
             TextView tv2 = v.findViewById(R.id.mail_about_tv);
             TextView tv3 = v.findViewById(R.id.mail_receiver_tv);
             TextView tv4 = v.findViewById(R.id.mail_receiver_address_tv);
+            LinearLayout linearLayout = v.findViewById(R.id.user_linearLayout);
 
             if (tv1 != null) {
                 String sender = "From : " + m.getSender();

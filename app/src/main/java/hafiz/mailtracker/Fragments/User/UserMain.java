@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -71,10 +73,20 @@ public class UserMain extends BaseFragment {
                     Mail m = ds.getValue(Mail.class);
                     Mail_data.add(m);
                 }
-                UserMailAdapter adapter = new UserMailAdapter(getActivity(),R.layout.user_list_item,Mail_data);
+                final UserMailAdapter adapter = new UserMailAdapter(getActivity(),R.layout.user_list_item,Mail_data);
                 ListView lv = getActivity().findViewById(R.id.user_mail_list);
                 lv.setAdapter(adapter);
                 lv.setDivider(null);
+                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Bundle bundle = new Bundle();
+                        String gson;
+                        gson = new Gson().toJson(Mail_data.get(position));
+                        bundle.putString("Data",gson);
+                        nextFragment(new UserTrack(),1,R.id.fragment_container,bundle);
+                    }
+                });
             }
 
             @Override

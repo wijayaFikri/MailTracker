@@ -17,4 +17,6 @@
     <string name="received_by_admin">Received by admin :</string>
     <string name="confirm_mail">CONFIRM MAIL</string>
     <string name="from">From :</string>
+    <string name="received_by">Received by :</string>
+    <string name="not_yet">NOT YET</string>
 </resources>
