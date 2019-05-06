@@ -203,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void nextFragment(Fragment fragment, int marker){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
+        ft.setCustomAnimations(R.anim.do_nothing,R.anim.fade_in);
         if(marker >0){ ft.addToBackStack("back pressed"); }
         ft.replace(R.id.fragment_container,fragment);
         ft.commit();

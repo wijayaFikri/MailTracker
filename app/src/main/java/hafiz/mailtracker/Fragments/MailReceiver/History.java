@@ -55,7 +55,7 @@ public class History extends BaseFragment {
                     if (Amail != null) {
                         Log.d("TAG",Amail.getReceiver());
                     }
-                    MailList.add(Amail);
+                    MailList.add(0,Amail);
                 }
                 ListView lv = Objects.requireNonNull(getActivity()).findViewById(R.id.History_list);
                 if( lv != null ) {
