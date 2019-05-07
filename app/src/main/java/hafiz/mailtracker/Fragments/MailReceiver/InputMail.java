@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Random;
 
 import hafiz.mailtracker.Fragments.BaseFragment;
 import hafiz.mailtracker.Model.Mail;
@@ -33,6 +34,7 @@ import hafiz.mailtracker.R;
 public class InputMail extends BaseFragment {
     DatabaseReference MailRef;
     DatabaseReference UserSideMail;
+
     public InputMail() {
         // Required empty public constructor
     }
@@ -75,7 +77,7 @@ public class InputMail extends BaseFragment {
 
             }
         });
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Objects.requireNonNull(getActivity()),android.R.layout.select_dialog_item,username_data);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Objects.requireNonNull(getActivity()), android.R.layout.select_dialog_item, username_data);
         final AutoCompleteTextView atv = getActivity().findViewById(R.id.autoCompleteTextView2);
         atv.setThreshold(1);
         atv.setAdapter(adapter);
@@ -90,11 +92,11 @@ public class InputMail extends BaseFragment {
                 final String about = about_et.getText().toString();
                 final String to = atv.getText().toString();
                 final String urgent_status;
-                if (! username_data.contains(to)){
+                if (!username_data.contains(to)) {
                     atv.setError("Username not found");
                     return;
                 }
-                if (cb.isChecked()){
+                if (cb.isChecked()) {
                     urgent_status = "yes";
                 } else {
                     urgent_status = "no";
@@ -105,18 +107,29 @@ public class InputMail extends BaseFragment {
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
                 String formattedDate = df.format(c);
 
-                String modifiedEmail = Data_array.get(idx).getEmail().replace("@","at");
-                modifiedEmail = modifiedEmail.replace(".","dot");
+                String modifiedEmail = Data_array.get(idx).getEmail().replace("@", "at");
+                modifiedEmail = modifiedEmail.replace(".", "dot");
                 DatabaseReference newref = UserSideMail.child(modifiedEmail).push();
                 String key = newref.getKey();
                 System.out.println(key);
-                Mail mail = new Mail(key,from,Data_array.get(idx).getEmail(),about,urgent_status,formattedDate,to,Data_array.get(idx).getAddress());
+
+                StringBuilder sb = new StringBuilder();
+                Random rd = new Random();
+                int number = rd.nextInt(1000);
+                Character[] Alphabet = new Character[]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+                        'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+                sb.append(number);
+                sb.append(Alphabet[rd.nextInt(25)]);
+                sb.append(Alphabet[rd.nextInt(25)]);
+                sb.append(rd.nextInt(100));
+                sb.append(Alphabet[rd.nextInt(25)]);
+                Mail mail = new Mail(key, from, Data_array.get(idx).getEmail(), about, urgent_status, formattedDate, to, Data_array.get(idx).getAddress(), sb.toString());
                 newref.setValue(mail);
 
                 MailRef.child(key).setValue(mail, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                        nextFragment(new MailReceiver_main(),1,R.id.fragment_container);
+                        nextFragment(new MailReceiver_main(), 1, R.id.fragment_container);
                     }
                 });
 
