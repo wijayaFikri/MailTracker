@@ -52,5 +52,11 @@ public class UserTrack extends Fragment {
         if (data.getStatus().equals("1")){
             status.setText("YES");
         }
+        if (data.getReceived().equals("1")){
+            TextView receiver_name = getActivity().findViewById(R.id.mail_receiver_tv);
+            receiver_name.setText(data.getReceiver_name());
+        }
+        TextView PinTv = getActivity().findViewById(R.id.PIN_Tv);
+        PinTv.setText(data.getPIN());
     }
 }

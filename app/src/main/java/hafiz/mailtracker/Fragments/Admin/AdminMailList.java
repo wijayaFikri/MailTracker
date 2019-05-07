@@ -57,31 +57,44 @@ public class AdminMailList extends BaseFragment {
         } else {
             status = "0";
         }
+        final List<Mail> NotReceived_List = new ArrayList<>();
+        final List<Mail> Received_List = new ArrayList<>();
         final List<Mail> MailList = new ArrayList<>();
         Mymail.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds: dataSnapshot.getChildren()
+                NotReceived_List.clear();
+                Received_List.clear();
+                MailList.clear();
+                for (DataSnapshot ds : dataSnapshot.getChildren()
                 ) {
                     Mail Amail = ds.getValue(Mail.class);
                     if (status.equals("0")) {
-                        if (Amail != null && Integer.parseInt(Amail.getStatus()) == 0 && Amail.getUrgent().equals("no")) {
-                            Log.d("TAG", Amail.getReceiver());
-                            MailList.add(Amail);
-                        } else if(Amail != null && Integer.parseInt(Amail.getStatus()) == 0 && Amail.getUrgent().equals("yes")) {
-                            MailList.add(0,Amail);
+                        if (Amail.getReceived().equals("0")) {
+                            if (Amail != null && Integer.parseInt(Amail.getStatus()) == 0 && Amail.getUrgent().equals("no")) {
+                                Log.d("TAG", Amail.getReceiver());
+                                NotReceived_List.add(Amail);
+                            } else if (Amail != null && Integer.parseInt(Amail.getStatus()) == 0 && Amail.getUrgent().equals("yes")) {
+                                NotReceived_List.add(0, Amail);
+                            } else if (Amail != null && Integer.parseInt(Amail.getStatus()) == 1 && Amail.getUrgent().equals("yes")) {
+                                Received_List.add(0, Amail);
+                            } else if (Amail != null && Integer.parseInt(Amail.getStatus()) == 1 && Amail.getUrgent().equals("no")) {
+                                Received_List.add(Amail);
+                            }
                         }
-                    }  else {
+                    } else {
                         MailList.add(Amail);
                     }
                 }
+                MailList.addAll(0, NotReceived_List);
+                MailList.addAll(0, Received_List);
                 ListView lv = Objects.requireNonNull(getActivity()).findViewById(R.id.admin_listview);
-                if( lv != null ) {
+                if (lv != null) {
                     MailAdapter listadapt;
-                    if(status.equals("0")){
-                        listadapt = new MailAdapter(getActivity(), R.layout.admin_listview_item, MailList,2);
+                    if (status.equals("0")) {
+                        listadapt = new MailAdapter(getActivity(), R.layout.admin_listview_item, MailList, 2);
                     } else {
-                        listadapt = new MailAdapter(getActivity(), R.layout.admin_listview_item, MailList,3);
+                        listadapt = new MailAdapter(getActivity(), R.layout.admin_listview_item, MailList, 3);
                     }
                     lv.setDivider(null);
                     lv.setAdapter(listadapt);
