@@ -8,6 +8,7 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -167,10 +168,17 @@ public class MailAdapter extends ArrayAdapter<Mail> {
 
 
             } else if (marker == 3) {
+                EditText et4 = v.findViewById(R.id.StatusHty);
+                et4.setFocusable(false);
+                if (m.getStatus().equals("0")) {
+                    et4.setText("NOT RECEIVED");
+                } else {
+                    et4.setText("RECEIVED");
+                }
                 TextView tv2 = v.findViewById(R.id.confirm_txt);
-                if (m.getStatus().equals("1")) {
+                if (m.getReceived().equals("1")) {
                     tv2.setText("Completed");
-
+                    tv2.setTextColor(ContextCompat.getColor(mContext, R.color.design_default_color_primary));
                 } else {
                     tv2.setText("Incomplete");
                     tv2.setTextColor(Color.parseColor("#ea1010"));

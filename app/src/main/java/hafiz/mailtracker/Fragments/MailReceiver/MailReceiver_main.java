@@ -3,10 +3,10 @@ package hafiz.mailtracker.Fragments.MailReceiver;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import java.util.Objects;
 
@@ -28,21 +28,21 @@ public class MailReceiver_main extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        return inflater.inflate(R.layout.fragment_mailreceiver_main, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button inputMail = Objects.requireNonNull(getActivity()).findViewById(R.id.inputMail);
+        CardView inputMail = Objects.requireNonNull(getActivity()).findViewById(R.id.inputMail_cv);
         inputMail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 nextFragment(new InputMail(),1,R.id.fragment_container);
             }
         });
-        Button HistoryBtn = getActivity().findViewById(R.id.HistoryBtn);
-        HistoryBtn.setOnClickListener(new View.OnClickListener() {
+        CardView HistoryCv = getActivity().findViewById(R.id.history_cv);
+        HistoryCv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 nextFragment(new History(),1,R.id.fragment_container);

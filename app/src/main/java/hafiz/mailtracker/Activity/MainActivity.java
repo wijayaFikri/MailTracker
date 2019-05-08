@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, Authorization.class);
             startActivity(intent);
         } else if(email.equals("admin@admin.com")){
-            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_three);
+            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_two);
             menu.setTitle("Logout");
             nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -71,11 +71,7 @@ public class MainActivity extends AppCompatActivity {
                             drawer.closeDrawers();
                             break;
                         case R.id.nav_item_two:
-                            Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
-                            drawer.closeDrawers();
-                            break;
-                        case R.id.nav_item_three:
-                            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_three);
+                            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_two);
                             String text = menu.getTitle().toString();
                             if (text.equals("Login")) {
                                 Intent intent = new Intent(MainActivity.this, Authorization.class);
@@ -85,8 +81,7 @@ public class MainActivity extends AppCompatActivity {
                                 TextView tv = nv.getHeaderView(0).findViewById(R.id.nav_header_textView);
                                 tv.setText("");
                                 mAuth.signOut();
-                                Intent services = new Intent(MainActivity.this, MailChecker.class);
-                                stopService(services);
+                                StopAllServices();
                                 Intent intent = new Intent(MainActivity.this, Authorization.class);
                                 startActivity(intent);
                             }
@@ -99,7 +94,8 @@ public class MainActivity extends AppCompatActivity {
             });
             nextFragment(new AdminMain(),0);
         } else if(email.equals("security@admin.com")){
-            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_three);
+            StopAllServices();
+            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_two);
             menu.setTitle("Logout");
             nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -111,11 +107,7 @@ public class MainActivity extends AppCompatActivity {
                             drawer.closeDrawers();
                             break;
                         case R.id.nav_item_two:
-                            Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
-                            drawer.closeDrawers();
-                            break;
-                        case R.id.nav_item_three:
-                            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_three);
+                            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_two);
                             String text = menu.getTitle().toString();
                             if (text.equals("Login")) {
                                 Intent intent = new Intent(MainActivity.this, Authorization.class);
@@ -168,11 +160,7 @@ public class MainActivity extends AppCompatActivity {
                             drawer.closeDrawers();
                             break;
                         case R.id.nav_item_two:
-                            Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
-                            drawer.closeDrawers();
-                            break;
-                        case R.id.nav_item_three:
-                            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_three);
+                            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_two);
                             String text = menu.getTitle().toString();
                             if (text.equals("Login")) {
                                 Intent intent = new Intent(MainActivity.this, Authorization.class);
@@ -182,8 +170,7 @@ public class MainActivity extends AppCompatActivity {
                                 TextView tv = nv.getHeaderView(0).findViewById(R.id.nav_header_textView);
                                 tv.setText("");
                                 mAuth.signOut();
-                                Intent services = new Intent(MainActivity.this, UserMailChecker.class);
-                                stopService(services);
+                                StopAllServices();
                                 Intent intent = new Intent(MainActivity.this, Authorization.class);
                                 startActivity(intent);
                             }
@@ -194,11 +181,18 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             });
-            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_three);
+            MenuItem menu = nv.getMenu().findItem(R.id.nav_item_two);
             menu.setTitle("Logout");
             nextFragment(new UserMain(),0);
         }
 
+
+    }
+    public void StopAllServices(){
+        Intent services = new Intent(MainActivity.this, MailChecker.class);
+        stopService(services);
+        Intent services2 = new Intent(MainActivity.this, UserMailChecker.class);
+        stopService(services2);
 
     }
     public void nextFragment(Fragment fragment, int marker){

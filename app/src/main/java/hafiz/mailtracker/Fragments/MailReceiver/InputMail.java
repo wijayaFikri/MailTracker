@@ -87,9 +87,18 @@ public class InputMail extends BaseFragment {
             public void onClick(View v) {
                 EditText from_et = Objects.requireNonNull(getActivity()).findViewById(R.id.from_et);
                 EditText about_et = getActivity().findViewById(R.id.about_et);
+                EditText receiver_name_et = getActivity().findViewById(R.id.Mail_Receiver_et);
                 CheckBox cb = getActivity().findViewById(R.id.checkBox);
                 final String from = from_et.getText().toString();
+                if (from.equals("")){
+                    from_et.setError("Mail sender must not empty");
+                    return;
+                }
                 final String about = about_et.getText().toString();
+                if (about.equals("")){
+                    about_et.setError("About mail must not be empty");
+                    return;
+                }
                 final String to = atv.getText().toString();
                 final String urgent_status;
                 if (!username_data.contains(to)) {
@@ -100,6 +109,10 @@ public class InputMail extends BaseFragment {
                     urgent_status = "yes";
                 } else {
                     urgent_status = "no";
+                }
+                String Receiver = receiver_name_et.getText().toString();
+                if (Receiver.equals("")){
+                    receiver_name_et.setError("Receiver must not be empty!");
                 }
                 Date c = Calendar.getInstance().getTime();
                 int idx = username_data.indexOf(to);
@@ -123,7 +136,7 @@ public class InputMail extends BaseFragment {
                 sb.append(Alphabet[rd.nextInt(25)]);
                 sb.append(rd.nextInt(100));
                 sb.append(Alphabet[rd.nextInt(25)]);
-                Mail mail = new Mail(key, from, Data_array.get(idx).getEmail(), about, urgent_status, formattedDate, to, Data_array.get(idx).getAddress(), sb.toString());
+                Mail mail = new Mail(key, from, Data_array.get(idx).getEmail(), about, urgent_status, formattedDate, Receiver, Data_array.get(idx).getAddress(), sb.toString());
                 newref.setValue(mail);
 
                 MailRef.child(key).setValue(mail, new DatabaseReference.CompletionListener() {

@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,12 +48,12 @@ public class AdminMain extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button btn = getActivity().findViewById(R.id.AdminBtn);
+        CardView MailCv = getActivity().findViewById(R.id.Mail_cv);
         if (!isMyServiceRunning(MailChecker.class)) {
             Intent intent = new Intent(getActivity(), MailChecker.class);
             getActivity().startService(intent);
         }
-        btn.setOnClickListener(new View.OnClickListener() {
+        MailCv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
@@ -60,39 +61,13 @@ public class AdminMain extends BaseFragment {
                 nextFragment(new AdminMailList(),1,R.id.fragment_container,bundle);
             }
         });
-        Button btn3 = getActivity().findViewById(R.id.admin_hty_btn);
-        btn3.setOnClickListener(new View.OnClickListener() {
+        CardView HistoryCv = getActivity().findViewById(R.id.history_cv);
+        HistoryCv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("value","1");
                 nextFragment(new AdminMailList(),1,R.id.fragment_container,bundle);
-            }
-        });
-        Button btn2 = getActivity().findViewById(R.id.test);
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NotificationChannel channel = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    channel = new NotificationChannel(
-                            "id",
-                            "name",
-                            NotificationManager.IMPORTANCE_HIGH);
-                    channel.setDescription("Description");
-                    final NotificationManager notificationManager = (NotificationManager)
-                            getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
-                    if (notificationManager != null) {
-                        notificationManager.createNotificationChannel(channel);
-                    }
-
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(Objects.requireNonNull(getActivity()), "id")
-                            .setSmallIcon(R.drawable.ic_account_box_black_24dp)
-                            .setContentTitle("Test")
-                            .setContentText("Test ugha")
-                            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                    notificationManager.notify(1, builder.build());
-                }
             }
         });
     }

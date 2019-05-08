@@ -12,13 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Admin"
+        android:text="Mail Receiver"
         android:layout_marginTop="50dp"
         android:textSize="50dp"
         android:textStyle="bold|italic" />
 
     <android.support.v7.widget.CardView
-        android:id="@+id/Mail_cv"
+        android:id="@+id/inputMail_cv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp">
@@ -59,7 +59,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Mail"
+                        android:text="Input Mail"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
@@ -67,7 +67,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="7"
-                        android:text="See the list of must processed mail." />
+                        android:text="Input a new mail." />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
