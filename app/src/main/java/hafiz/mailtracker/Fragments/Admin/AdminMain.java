@@ -49,10 +49,6 @@ public class AdminMain extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         CardView MailCv = getActivity().findViewById(R.id.Mail_cv);
-        if (!isMyServiceRunning(MailChecker.class)) {
-            Intent intent = new Intent(getActivity(), MailChecker.class);
-            getActivity().startService(intent);
-        }
         MailCv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

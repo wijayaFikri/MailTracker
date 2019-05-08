@@ -48,10 +48,6 @@ public class UserMain extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (!isMyServiceRunning(UserMailChecker.class)) {
-            Intent intent = new Intent(getActivity(), UserMailChecker.class);
-            getActivity().startService(intent);
-        }
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_user_main, container, false);
     }

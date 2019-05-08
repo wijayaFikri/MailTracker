@@ -50,7 +50,6 @@ public class Login extends BaseFragment {
                 String email = email_et.getText().toString();
                 String password = password_et.getText().toString();
                 ((Authorization)getActivity()).login(email,password);
-                String link = "http://basondatabase.000webhostapp.com/Login.php?email=" + email + "&password=" + password;
             }
         });
         TextView registTV = getActivity().findViewById(R.id.regist_tv);

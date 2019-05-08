@@ -1,9 +1,13 @@
 package hafiz.mailtracker.Fragments.MailReceiver;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +29,7 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.Random;
 
+import hafiz.mailtracker.Fragments.Admin.AdminMailList;
 import hafiz.mailtracker.Fragments.BaseFragment;
 import hafiz.mailtracker.Model.Mail;
 import hafiz.mailtracker.Model.User_data;
@@ -142,7 +147,20 @@ public class InputMail extends BaseFragment {
                 MailRef.child(key).setValue(mail, new DatabaseReference.CompletionListener() {
                     @Override
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                        nextFragment(new MailReceiver_main(), 1, R.id.fragment_container);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setMessage("Success")
+                                .setTitle("Input Mail")
+                                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                        nextFragment(new MailReceiver_main(), 1, R.id.fragment_container);
+                                    }
+                                });
+
+                        // 3. Get the AlertDialog from create()
+                        final AlertDialog dialog = builder.create();
+                        dialog.show();
+
                     }
                 });
 

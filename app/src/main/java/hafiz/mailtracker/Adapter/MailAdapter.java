@@ -30,6 +30,7 @@ import java.util.Objects;
 
 import hafiz.mailtracker.Activity.MainActivity;
 import hafiz.mailtracker.Fragments.Admin.AdminMailList;
+import hafiz.mailtracker.Fragments.MailReceiver.MailReceiver_main;
 import hafiz.mailtracker.Model.Mail;
 import hafiz.mailtracker.R;
 
@@ -109,22 +110,32 @@ public class MailAdapter extends ArrayAdapter<Mail> {
                 }
                 tv2.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(final View v) {
                         if (tv2.getText().equals("CONFIRM")) {
-                            m.setStatus("1");
-                            FirebaseDatabase mAuth = FirebaseDatabase.getInstance();
-                            DatabaseReference db = mAuth.getReference("Mail");
-                            DatabaseReference UserSideDb = mAuth.getReference("UserMail");
-                            String modifiedEmail = m.getReceiver();
-                            modifiedEmail = modifiedEmail.replace("@", "at");
-                            modifiedEmail = modifiedEmail.replace(".", "dot");
-                            UserSideDb.child(modifiedEmail).child(m.getID()).setValue(m);
-                            db.child(m.getID()).setValue(m);
-                            Toast.makeText(mContext, m.getSender(),
-                                    Toast.LENGTH_LONG).show();
-                            AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                            Fragment myFragment = new AdminMailList();
-                            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                            builder.setMessage("Do the mail successfully received ?")
+                                    .setTitle("CONFIRMATION")
+                                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            m.setStatus("1");
+                                            FirebaseDatabase mAuth = FirebaseDatabase.getInstance();
+                                            DatabaseReference db = mAuth.getReference("Mail");
+                                            DatabaseReference UserSideDb = mAuth.getReference("UserMail");
+                                            String modifiedEmail = m.getReceiver();
+                                            modifiedEmail = modifiedEmail.replace("@", "at");
+                                            modifiedEmail = modifiedEmail.replace(".", "dot");
+                                            UserSideDb.child(modifiedEmail).child(m.getID()).setValue(m);
+                                            db.child(m.getID()).setValue(m);
+                                            AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                                            Fragment myFragment = new AdminMailList();
+                                            activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).addToBackStack(null).commit();
+                                        }
+                                    });
+
+                            // 3. Get the AlertDialog from create()
+                            final AlertDialog dialog = builder.create();
+                            dialog.show();
                         } else {
                             // 1. Instantiate an AlertDialog.Builder with its constructor
                             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);

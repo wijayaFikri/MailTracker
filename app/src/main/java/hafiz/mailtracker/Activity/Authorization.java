@@ -24,6 +24,8 @@ import java.util.Objects;
 import hafiz.mailtracker.Fragments.Authorization.Login;
 import hafiz.mailtracker.Model.User_data;
 import hafiz.mailtracker.R;
+import hafiz.mailtracker.services.MailChecker;
+import hafiz.mailtracker.services.UserMailChecker;
 
 public class Authorization extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -81,6 +83,15 @@ public class Authorization extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            if(user.getEmail().equals("security@admin.com")){
+                                Intent services = new Intent(Authorization.this, MailChecker.class);
+                                stopService(services);
+                                Intent services2 = new Intent(Authorization.this, UserMailChecker.class);
+                                stopService(services2);
+                            } else if (user.getEmail().equals("admin@admin.com")){
+                                Intent services = new Intent(Authorization.this, MailChecker.class);
+                                startService(services);
+                            }
                             Intent intent = new Intent(Authorization.this,MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);

@@ -89,7 +89,7 @@ public class MailChecker extends Service {
         return START_STICKY;
         // For each start request, send a message to start a job and deliver the
     }
-        @Override
+    @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
