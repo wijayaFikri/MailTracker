@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
+    android:background="#f1f2f6"
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".Fragments.MailReceiver.MailReceiver_main">
@@ -20,6 +21,8 @@
     <android.support.v7.widget.CardView
         android:id="@+id/inputMail_cv"
         android:layout_width="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp">
 
@@ -76,6 +79,8 @@
     <android.support.v7.widget.CardView
         android:id="@+id/history_cv"
         android:layout_width="match_parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginTop="30dp"
         android:layout_height="wrap_content">
         <LinearLayout

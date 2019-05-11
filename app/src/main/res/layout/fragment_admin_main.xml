@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
+    android:background="#f1f2f6"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
@@ -19,6 +20,8 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/Mail_cv"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp">
@@ -77,6 +80,8 @@
         android:id="@+id/history_cv"
         android:layout_width="match_parent"
         android:layout_marginTop="30dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
