@@ -7,6 +7,7 @@ public class Mail {
     private String about;
     private String Urgent;
     private String date;
+    private String received_by;
     private String Receiver_name;
     private String Status;
     private String Received;
@@ -28,6 +29,14 @@ public class Mail {
         this.Received = "0";
         this.PIN = pin;
         Receiver_address = receiver_address;
+    }
+
+    public void setReceived_by(String received_by) {
+        this.received_by = received_by;
+    }
+
+    public String getReceived_by() {
+        return received_by;
     }
 
     public void setPIN(String PIN) {

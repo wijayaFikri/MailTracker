@@ -54,9 +54,11 @@ public class UserTrack extends Fragment {
         }
         if (data.getReceived().equals("1")){
             TextView receiver_name = getActivity().findViewById(R.id.mail_receiver_tv);
-            receiver_name.setText(data.getReceiver_name());
+            receiver_name.setText(data.getReceived_by());
         }
         TextView PinTv = getActivity().findViewById(R.id.PIN_Tv);
         PinTv.setText(data.getPIN());
+        TextView receiver = getActivity().findViewById(R.id.receiver_textview);
+        receiver.setText(data.getReceiver_name());
     }
 }

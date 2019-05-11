@@ -142,6 +142,7 @@ public class InputMail extends BaseFragment {
                 sb.append(rd.nextInt(100));
                 sb.append(Alphabet[rd.nextInt(25)]);
                 Mail mail = new Mail(key, from, Data_array.get(idx).getEmail(), about, urgent_status, formattedDate, Receiver, Data_array.get(idx).getAddress(), sb.toString());
+                mail.setReceived_by(to);
                 newref.setValue(mail);
 
                 MailRef.child(key).setValue(mail, new DatabaseReference.CompletionListener() {
