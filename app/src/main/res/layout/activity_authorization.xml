@@ -11,7 +11,7 @@
         android:layout_width="411dp"
         android:layout_height="731dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/coming"
+        android:background="#2980b9"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

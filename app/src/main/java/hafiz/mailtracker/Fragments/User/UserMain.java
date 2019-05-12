@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -69,7 +70,7 @@ public class UserMain extends BaseFragment {
         user_history_linear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nextFragment(new UserHistory(),1,R.id.fragment_container);
+                nextFragment(new UserHistory(), 1, R.id.fragment_container);
             }
         });
         email = email.replace("@", "at");
@@ -81,22 +82,33 @@ public class UserMain extends BaseFragment {
                 for (DataSnapshot ds : dataSnapshot.getChildren()
                 ) {
                     Mail m = ds.getValue(Mail.class);
-                    Mail_data.add(m);
-                }
-                final UserMailAdapter adapter = new UserMailAdapter(getActivity(),R.layout.user_list_item,Mail_data);
-                ListView lv = getActivity().findViewById(R.id.user_mail_list);
-                lv.setAdapter(adapter);
-                lv.setDivider(null);
-                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Bundle bundle = new Bundle();
-                        String gson;
-                        gson = new Gson().toJson(Mail_data.get(position));
-                        bundle.putString("Data",gson);
-                        nextFragment(new UserTrack(),1,R.id.fragment_container,bundle);
+                    if (m.getReceived().equals("0")) {
+                        Mail_data.add(m);
                     }
-                });
+
+                }
+                if (Mail_data.size() == 0){
+                    ListView lv = getActivity().findViewById(R.id.user_mail_list);
+                    lv.setVisibility(View.INVISIBLE);
+                    ((ViewManager)lv.getParent()).removeView(lv);
+                } else
+                {
+                    final UserMailAdapter adapter = new UserMailAdapter(getActivity(), R.layout.user_list_item, Mail_data);
+                    ListView lv = getActivity().findViewById(R.id.user_mail_list);
+                    lv.setAdapter(adapter);
+                    lv.setDivider(null);
+                    lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Bundle bundle = new Bundle();
+                            String gson;
+                            gson = new Gson().toJson(Mail_data.get(position));
+                            bundle.putString("Data", gson);
+                            nextFragment(new UserTrack(), 1, R.id.fragment_container, bundle);
+                        }
+                    });
+                }
+
             }
 
             @Override
