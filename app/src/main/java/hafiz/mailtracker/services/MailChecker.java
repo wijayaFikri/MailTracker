@@ -3,6 +3,7 @@ package hafiz.mailtracker.services;
 import android.app.IntentService;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
+import hafiz.mailtracker.Activity.MainActivity;
 import hafiz.mailtracker.Model.Mail;
 import hafiz.mailtracker.R;
 
@@ -34,6 +36,9 @@ public class MailChecker extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference ref = db.getReference("Mail");
+        final Intent intent2 = new Intent(this,MainActivity.class);
+        final PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent2, 0);
+
         ref.limitToLast(1).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -60,6 +65,7 @@ public class MailChecker extends Service {
                                 .setSmallIcon(R.drawable.ic_account_box_black_24dp)
                                 .setContentTitle(Sender)
                                 .setContentText(about)
+                                .setContentIntent(pendingIntent)
                                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
                         notificationManager.notify(1, builder.build());
                     }
