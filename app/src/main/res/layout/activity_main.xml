@@ -19,7 +19,43 @@
             android:elevation="4dp"
             android:background="@color/emerald"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/history_icon"
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="right"
+                    android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/toolbar_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:adjustViewBounds="true"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/ic_history_black_36dp"
+                android:contentDescription="@string/history"
+                android:scaleType="centerCrop"
+                android:visibility="visible" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/toolbar_textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="HISTORY"
+                            android:layout_marginEnd="15dp"
+                            android:layout_gravity="center"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
 
         <FrameLayout
             android:id="@+id/fragment_container"
