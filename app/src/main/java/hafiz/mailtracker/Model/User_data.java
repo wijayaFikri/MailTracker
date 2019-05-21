@@ -3,7 +3,6 @@ package hafiz.mailtracker.Model;
 public class User_data {
     private String email;
     private String Username;
-    private String token;
     private String Address;
     public User_data(){
         //empty constructor
@@ -11,7 +10,6 @@ public class User_data {
      public User_data(String email, String Username, String address){
         this.email = email;
         this.Username = Username;
-        this.token = token;
         this.Address = address;
     }
 
@@ -21,14 +19,6 @@ public class User_data {
 
     public String getAddress() {
         return Address;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getToken() {
-        return token;
     }
 
     public void setUsername(String username) {
